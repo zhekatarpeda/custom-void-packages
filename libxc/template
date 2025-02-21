@@ -1,0 +1,31 @@
+# Template file for 'libxc'
+pkgname=libxc
+version=6.2.2
+revision=1
+#archs="i686 x86_64"
+build_style=cmake
+configure_args="-DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DENABLE_FORTRAN=ON -DENABLE_GENERIC=ON -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE"
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="gcc-fortran libgfortran-devel"
+depends=""
+short_desc="Library of exchange-correlation functionals for density-functional theory"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://gitlab.com/libxc/libxc"
+#changelog=""
+distfiles="https://gitlab.com/libxc/libxc/-/archive/${version}/libxc-${version}.tar.gz"
+checksum=d1b65ef74615a1e539d87a0e6662f04baf3a2316706b4e2e686da3193b26b20f
+
+libxc-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/cmake
+               # vmove "usr/lib/*.a"
+                vmove "usr/lib/*.so"
+                vmove usr/lib/pkgconfig
+        }
+}

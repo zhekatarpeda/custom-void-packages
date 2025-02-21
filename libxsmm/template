@@ -1,0 +1,31 @@
+# Template file for 'libxsmm'
+pkgname=libxsmm
+version=1.17
+revision=1
+archs="x86_64"
+build_style=gnu-makefile
+#configure_args="-DXSMM_STATIC=OFF"
+make_build_args="BLAS=1 STATIC=0 CXX=g++ CC=cc LD=gcc AR=ar OMP=1 FC=gfortran MKL=0 PYTHON=python3.12"
+make_install_args="BLAS=1 STATIC=0 CXX=g++ CC=cc LD=gcc AR=ar OMP=1 FC=gfortran MKL=0 PYTHON=python3.12"
+hostmakedepends=""
+makedepends="python3-devel pkg-config blas-devel lapack-devel gcc-fortran libgomp-devel libgfortran-devel libgcc libgcc-devel"
+depends=""
+short_desc="Library for specialized dense and sparse matrix operations, and deep learning primitives"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/libxsmm"
+#changelog=""
+distfiles="https://github.com/libxsmm/libxsmm/archive/refs/tags/${version}.tar.gz"
+checksum=8b642127880e92e8a75400125307724635ecdf4020ca4481e5efe7640451bb92
+
+libxsmm-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/cmake
+                vmove "usr/lib/*.a"  
+                vmove "usr/lib/*.so"
+                vmove usr/lib/pkgconfig
+        }
+}

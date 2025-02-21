@@ -1,0 +1,25 @@
+# Template file for 'molequeue'
+pkgname=molequeue
+version=0.9.0
+revision=1
+archs="x86_64"
+build_style=cmake
+hostmakedepends="cmake"
+makedepends="qt5-devel"
+depends="qt5-network qt5-core libstdc++ glibc libgcc qt5-widgets qt5-gui"
+short_desc="Desktop integration of high performance computing resources"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/OpenChemistry/molequeue"
+distfiles="https://github.com/OpenChemistry/molequeue/archive/refs/tags/${version}.tar.gz"
+checksum=7dd234742c8d73be95281fedf4ed9d09648ecc351afb5f098cd32f48c3df3bd5
+
+#molequeue-devel_package() {
+#	depends="${sourcepkg}>=${version}_${revision}"
+#        short_desc+=" - development files"
+#       pkg_install() {
+#                vmove usr/include
+#                vmove "usr/lib/cmake"
+#                vmove "usr/lib/*.so"
+#        }
+#}

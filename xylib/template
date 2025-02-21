@@ -1,0 +1,28 @@
+# Template file for 'xylib'
+pkgname=xylib
+version=1.6
+revision=1
+archs="x86_64"
+build_style=cmake
+build_helper=cmake-wxWidgets-gtk3
+configure_args=""
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="boost-devel zlib-devel wxWidgets-gtk3-devel"
+depends="zlib libstdc++ glibc libgcc wxWidgets-gtk3 wxWidgets-common"
+short_desc="Library for reading files with x-y data from experimental methods"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="LGPL-2.1"
+homepage="https://github.com/wojdyr/xylib"
+distfiles="https://github.com/wojdyr/xylib/archive/refs/tags/v${version}.tar.gz"
+checksum=37774980be4693f178c6638478b7e050dc5c5730c547517a4b83b7e027bff39c
+
+xylib-devel_package() {
+	depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+		vmove usr/include
+		vmove "usr/lib/*.so"
+	}
+}

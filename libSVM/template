@@ -1,0 +1,42 @@
+# Template file for 'libSVM'
+pkgname=libSVM
+version=335
+revision=1
+archs="x86_64"
+build_style=gnu-makefile
+#configure_args=""
+#make_build_args="-f Makefile"
+make_build_target=""
+make_install_target="clean all lib"
+make_use_env=yes
+hostmakedepends=""
+makedepends=""
+depends="libstdc++ glibc libgcc"
+short_desc="A Library for Support Vector Machines "
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="BSD-3-Clause"
+homepage="https://github.com/cjlin1/libsvm"
+distfiles="https://github.com/cjlin1/libsvm/archive/refs/tags/v${version}.tar.gz"
+checksum=f864faaf0e6606aa5eb89b48d76b77db43b501c3b0b1842ae036f9d754e675d9
+CFLAGS+=" -fPIC"
+#CXXFLAGS="g++ -shared -Wl,-soname=libsvm.so"
+
+post_install() {
+	vbin svm-predict
+	vbin svm-scale
+	vbin svm-train
+	ln -s libsvm.so.* libsvm.so
+	vinstall libsvm.so 755 /usr/lib
+	vinstall libsvm.so.4 755 /usr/lib
+	vinstall svm.h 644 /usr/include/libsvm
+}
+
+libSVM-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+	shlib_provides="libsvm.so"
+        pkg_install() {
+                vmove usr/include
+                vmove "usr/lib/*.so"
+        }
+}

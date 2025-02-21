@@ -1,0 +1,31 @@
+# Template file for 'scalapack'
+pkgname=scalapack
+version=2.1.0
+revision=1
+#archs="i686 x86_64"
+build_style=cmake
+configure_args="-DCMAKE_Fortran_FLAGS:STRING="-fallow-argument-mismatch" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE:STRING=None -DSCALAPACK_BUILD_TESTS:BOOL=OFF"
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="gcc-fortran openmpi openmpi-devel libopenmpi blas-devel lapack-devel"
+depends=""
+short_desc="A library of high performance linear algebra routines for distributed memory computers supporting MPI"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/Reference-ScaLAPACK/scalapack"
+#changelog=""
+distfiles="https://github.com/Reference-ScaLAPACK/scalapack/archive/refs/tags/v${version}.tar.gz"
+checksum=f03fda720a152030b582a237f8387014da878b84cbd43c568390e9f05d24617f
+
+scalapack-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                #vmove usr/include
+                #vmove "usr/lib/cmake"
+                #vmove usr/share/cmake
+                vmove "usr/lib/*.so"
+                vmove usr/lib/pkgconfig
+        }
+}

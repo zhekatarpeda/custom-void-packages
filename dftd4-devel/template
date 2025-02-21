@@ -1,0 +1,31 @@
+# Template file for 'dftd4'
+pkgname=dftd4
+version=3.7.0
+revision=1
+archs="x86_64"
+build_style=cmake
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="git gcc-fortran libgomp-devel openblas-devel"
+depends=""
+short_desc="Generally Applicable Atomic-Charge Dependent London Dispersion Correction"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/dftd4/dftd4"
+#changelog=""
+distfiles="https://github.com/dftd4/dftd4/archive/refs/tags/v${version}.tar.gz"
+checksum=f00b244759eff2c4f54b80a40673440ce951b6ddfa5eee1f46124297e056f69c
+
+dftd4-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/cmake
+                vmove "usr/lib/*.a"
+                #vmove "usr/lib/*.so"
+                vmove usr/lib/pkgconfig
+        }
+}

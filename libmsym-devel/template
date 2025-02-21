@@ -1,0 +1,32 @@
+# Template file for 'libmsym'
+pkgname=libmsym
+version=0.2.3.paper
+revision=1
+archs="x86_64"
+#build_wrksrc=
+build_style=cmake
+configure_args="-DBUILD_SHARED_LIBS=ON"
+#make_install_args="DESTDIR=${DESTDIR}"
+hostmakedepends="cmake"
+makedepends="glibc-devel"
+depends=""
+short_desc="Molecular point group symmetry C library"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="MIT"
+homepage="https://github.com/mcodev31/libmsym"
+#changelog=""
+distfiles="https://github.com/mcodev31/libmsym/archive/refs/tags/v0.2.3-paper.tar.gz"
+checksum=3741ebe163cf40696570d6b62e4834ca587d43dcac9de713994cc5e2960fb8fd
+
+libmsym-devel_package() {
+	depends="glibc-devel ${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/cmake
+                #vmove usr/share/cmake
+                vmove "usr/lib/*.so"
+                #vmove usr/lib/pkgconfig
+        }
+}
+

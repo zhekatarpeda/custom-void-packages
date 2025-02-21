@@ -1,0 +1,55 @@
+# Template file for 'libint'
+pkgname=libint
+version=2.9.0
+revision=1
+#archs="i686 x86_64"
+build_style=cmake
+build_wrksrc=tarball_build/libint_build/${pkgname}-${version}
+configure_args="-DLIBINT2_BUILD_SHARED_AND_STATIC_LIBS=YES -DENABLE_FORTRAN=ON"
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="tar automake gcc-fortran libgfortran-devel eigen gmpxx-devel boost-devel"
+depends=""
+short_desc="High-performance library for computing Gaussian integrals in quantum mechanics"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/evaleev/libint"
+#changelog=""
+distfiles="https://github.com/evaleev/libint/archive/refs/tags/v${version}.tar.gz"
+checksum=4929b2f2d3e53479270be052e366e8c70fa154a7f309e5c2c23b7d394159687d
+
+post_extract() {
+	./autogen.sh
+	mkdir -p tarball_build
+	cd tarball_build
+	$OLDPWD/configure \
+	--enable-eri=1 \
+	--enable-eri2=1 \
+	--enable-eri3=1 \
+	--enable-fma=1 \
+	--with-max-am=5 \
+	--with-eri-max-am=5,4 \
+	--with-eri2-max-am=7,6 \
+	--with-eri3-max-am=7,6 \
+	--with-opt-am=3
+	
+	export FC=gfortran
+	make export
+	mkdir -p libint_build
+	tar -xzf ${pkgname}-${version}.tgz -C libint_build
+	cd libint_build
+	cd ${pkgname}-${version}
+}
+
+libint-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/cmake
+                vmove "usr/lib/*.a"
+                vmove "usr/lib/*.so"
+                vmove usr/lib/pkgconfig
+        }
+}

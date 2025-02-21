@@ -1,0 +1,23 @@
+# Template file for 'xdrawchem'
+pkgname=xdrawchem
+version=1.10.2
+revision=1
+archs="x86_64"
+#build_style=gnu-makefile
+build_style=qmake
+configure_args="${XBPS_BUILDDIR}/${pkgname}-${version}/xdrawchem-qt5/xdrawchem.pro"
+#make_build_args=""
+#make_install_args=""
+hostmakedepends="qt5-qmake"
+makedepends="qt5-devel openbabel-devel"
+depends="openbabel qt5-printsupport qt5-widgets qt5-gui qt5-xml qt5-network qt5-core libstdc++ glibc libgcc"
+short_desc="A two-dimensional molecule drawing program"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/bryanherger/xdrawchem"
+distfiles="https://github.com/bryanherger/xdrawchem/archive/refs/tags/${version}-1.tar.gz"
+checksum=009b525e570cd79b3e59880877871e258071fecdef6c397d7533f3920faa9a7e
+
+post_patch() {
+	cd ${XBPS_BUILDDIR}/${pkgname}-${version}/xdrawchem-qt5
+}

@@ -1,0 +1,31 @@
+# Template file for 'avogadrolibs'
+pkgname=avogadrolibs
+version=1.99.0
+revision=1
+archs="x86_64"
+build_style=cmake
+build_helper=qmake #if you want to enable vtk, add qt support for it and -DUSE_EXTERNAL_PUGIXML:BOOL=ON
+configure_args="-DUSE_EXTERNAL_PUGIXML:BOOL=OFF -DUSE_VTK:BOOL=OFF -DOpenGL_GL_PREFERENCE=GLVND -DUSE_HDF5:BOOL=ON -DUSE_PYTHON:BOOL=ON  -DUSE_QT:BOOL=ON -DUSE_LIBMSYM:BOOL=ON -DUSE_SPGLIB:BOOL=ON -DUSE_MMTF:BOOL=ON -DCMAKE_BUILD_TYPE:STRING=Release"
+hostmakedepends="cmake"
+makedepends="git eigen spglib-devel hdf5-devel mmtf-cpp libglvnd-devel glew-devel qt5-devel qt5-svg-devel libarchive-devel python3-pybind11 libmsym-devel"
+depends="hdf5 libstdc++ glibc libgcc qt5-widgets qt5-gui qt5-core glew libglvnd qt5-concurrent qt5-svg qt5-network libarchive libmsym spglib"
+short_desc="Advanced cross-platform molecular editor libraries"
+maintainer="Zakhar Tarasov<werlait5@gmail.com>"
+license="BSD-3-Clause"
+homepage="https://two.avogadro.cc"
+changelog="https://github.com/OpenChemistry/avogadrolibs/releases/tag/${version}"
+distfiles="https://github.com/OpenChemistry/avogadrolibs/archive/refs/tags/${version}.tar.gz"
+checksum=34808e3c602b0f60f3c160ff0220832aee777db86e962e3f958c6327fb434063
+python_version=3
+
+avogadrolibs-devel_package() {
+	depends="${sourcepkg}>=${version}_${revision}"
+	short_desc+=" - development files"
+	pkg_install() {
+		vmove usr/include
+		vmove usr/lib/avogadro2
+		vmove usr/share/avogadro2
+		vmove "usr/lib/cmake"
+		vmove "usr/lib/*.so"
+	}
+}

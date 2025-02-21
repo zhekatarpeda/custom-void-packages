@@ -1,0 +1,29 @@
+# Template file for 'dbcsr'
+pkgname=dbcsr
+version=2.7.0
+revision=1
+#archs="i686 x86_64"
+build_style=cmake
+configure_args="-DBUILD_SHARED_LIBS=ON -DUSE_MPI_F08=ON -DCMAKE_BUILD_TYPE=None"
+hostmakedepends=""
+makedepends="python3-devel python-fypp gcc-fortran libgomp-devel libgfortran-devel blas-devel lapack-devel openmpi openmpi-devel libopenmpi"
+depends=""
+short_desc="Distributed Block Compressed Sparse Row matrix library"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/cp2k/dbcsr"
+#changelog=""
+distfiles="https://github.com/cp2k/dbcsr/archive/refs/tags/v${version}.tar.gz"
+checksum=17097065bdc5e540d3766ae482b7e08d5f0c6ea63bfbf5ecfa45fc70766689bc
+
+dbcsr-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/cmake
+                #vmove "usr/lib/*.a"
+                vmove "usr/lib/*.so"
+                #vmove usr/lib/pkgconfig
+        }
+}

@@ -1,0 +1,23 @@
+# Template file for 'fityk'
+pkgname=fityk
+version=1.3.2
+revision=1
+archs="x86_64"
+build_style=gnu-configure
+#build_helper=cmake-wxWidgets-gtk3
+#configure_args="--prefix=/usr" DDOWNLOAD_LUA=NO -DDOWNLOAD_XYLIB=NO -DDOWNLOAD_ZLIB=NO"
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="boost-devel zlib-devel xylib-devel lua-devel wxWidgets-gtk3-devel readline-devel python3-devel"
+depends="xylib zlib lua53 libstdc++ glibc libgcc libreadline8 wxWidgets-gtk3 wxWidgets-common"
+short_desc="A program for nonlinear fitting of analytical functions to data"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/wojdyr/fityk"
+distfiles=" https://github.com/wojdyr/fityk/releases/download/v${version}/fityk-${version}.tar.bz2"
+checksum=6da5eb6279d90b241108e36c2d4880cafec82d7225a5d49a28675a07b4360f0b
+CXXFLAGS=" -std=c++14"
+python_version=3
+
+export WX_CONFIG_NAME="wx-config-gtk3"

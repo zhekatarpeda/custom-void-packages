@@ -1,0 +1,33 @@
+# Template file for 'elpa'
+pkgname=elpa
+version=2024.05.001
+revision=1
+#archs="i686 x86_64"
+build_style=gnu-configure
+configure_args="--disable-sse --disable-avx --disable-avx2 --disable-avx512 --enable-openmp FC="mpif90" FCFLAGS="-fallow-argument-mismatch" --enable-scalapack-tests --without-threading-support-check-during-build"
+hostmakedepends=""
+makedepends="automake python3-devel libtool gcc-fortran libgfortran-devel libgomp-devel openmpi openmpi-devel libopenmpi blas-devel scalapack-devel lapack-devel"
+depends=""
+short_desc="Eigenvalue Solvers for Petaflop Apllications"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://elpa.mpcdf.mpg.de"
+#changelog=""
+distfiles="https://gitlab.mpcdf.mpg.de/elpa/elpa/-/archive/release_2024_05_001/elpa-release_2024_05_001.tar.gz"
+checksum=5e0c685536869bb91c230d70cac5e779ff418575681836f240b3e64e10b23f3e
+
+post_extract() {
+	./autogen.sh
+}
+
+elpa-devel_package() {
+        depends="${sourcepkg}>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                #vmove usr/lib/cmake
+                vmove "usr/lib/*.a"
+                vmove "usr/lib/*.so"
+                vmove usr/lib/pkgconfig
+        }
+}

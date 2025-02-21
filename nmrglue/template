@@ -1,0 +1,19 @@
+# Template file for 'nmrglue'
+pkgname=nmrglue
+version=0.11
+revision=2
+#archs="i686 x86_64"
+build_style=python3-module
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="python3-setuptools"
+depends="python3-numpy python3-scipy python3-matplotlib"
+short_desc="A module for working with NMR data in Python"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/jjhelmus/nmrglue"
+#changelog=""
+distfiles="https://github.com/jjhelmus/nmrglue/archive/refs/tags/v${version}.tar.gz"
+checksum=68451280d529b761a0a1f636d7e6e6787e0758d5accdea1d9afb3b93ad5df0b4

@@ -1,0 +1,23 @@
+# Template file for 'travis'
+pkgname=travis
+version=220729
+revision=1
+#archs="i686 x86_64"
+build_style=gnu-makefile
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends=""
+depends=""
+short_desc="Program package for analyzing and visualizing Monte Carlo and molecular dynamics trajectories"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="http://www.travis-analyzer.de"
+#changelog=""
+distfiles="http://www.travis-analyzer.de/files/travis-src-${version}.tar.gz"
+checksum=bdc1e4062e7766e3e2b6c2723ed3a1a74543a0f9156c12a139e4a03a9736123f
+
+do_install() {
+	vbin exe/travis travis
+}
