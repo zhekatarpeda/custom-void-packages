@@ -1,0 +1,18 @@
+# Template file for 'openms'
+pkgname=openms
+version=3.2.0
+revision=1
+archs="x86_64"
+build_style=cmake
+configure_args="-DHAS_XSERVER=OFF -DNO_WEBENGINE_WIDGETS=YES"
+#make_build_args=""
+#make_install_args=""
+hostmakedepends=""
+makedepends="git libgomp-devel libxerces-c-devel boost-devel libSVM-devel CoinMP-devel zlib-devel bzip2-devel eigen qt5-devel qt5-svg-devel"
+depends="libstdc++ glibc libgcc qt5-svg libxerces-c qt5-network libgomp qt5-widgets qt5-gui qt5-core libSVM bzip2 zlib CoinMP"
+short_desc="C++ library and tools for LC/MS data management and analyse"
+maintainer="Tarasov Zakhar <werlait5@gmail.com>"
+license="BSD-3-Clause"
+homepage="https://openms.de/"
+distfiles="https://github.com/OpenMS/OpenMS/archive/refs/tags/release/${version}.tar.gz"
+checksum=5ff3ad30ac7f532f5fe0bc2c7ac28508e559848f8070399e2854302923e0ab25
